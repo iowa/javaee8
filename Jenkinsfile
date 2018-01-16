@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Download') {
+    stage('mvn clean package') {
       steps {
-        git(url: 'https://github.com/iowa/javaee8.git', branch: 'master', changelog: true, poll: true)
+        sh 'mvn clean package'
       }
     }
   }
