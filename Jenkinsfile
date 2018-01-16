@@ -1,9 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('mvn clean package') {
-      steps {
-        sh 'mvn clean package'
+    stage('GIT') {
+      parallel {
+        stage('GIT') {
+          steps {
+            git(url: 'https://github.com/iowa/javaee8.git', branch: 'master')
+          }
+        }
+        stage('MAVEN') {
+          steps {
+            sh 'mvn clean package'
+          }
+        }
       }
     }
   }
